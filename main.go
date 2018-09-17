@@ -16,7 +16,7 @@ func (t *Task) ProcessTask(c chan string) {
 		time.Sleep(1 * time.Millisecond)
 	}
 
-	c <- "End " + t.name + "!\n"
+	c <- "End " + t.name + "!\n" // 送信
 }
 
 var TaskA = Task{name: "TaskA", processTime: 1000}
@@ -31,7 +31,7 @@ func Parallel() {
 
 	// 入る順番はgoroutineが終わった順
 	// channelはベルトコンベアのイメージ
-	m1, m2, m3 := <-c, <-c, <-c
+	m1, m2, m3 := <-c, <-c, <-c // 受信
 
 	// 全部の<-cを受け取るまで処理がブロックされてこの処理は実行されない
 	fmt.Println(m1, m2, m3)
